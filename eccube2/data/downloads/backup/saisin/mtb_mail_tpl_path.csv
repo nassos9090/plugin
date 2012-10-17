@@ -1,0 +1,6 @@
+id,name,rank
+1,mail_templates/order_mail.tpl,0
+2,mail_templates/order_mail.tpl,1
+3,mail_templates/order_mail.tpl,2
+4,mail_templates/order_mail.tpl,3
+5,mail_templates/contact_mail.tpl,4

@@ -1,0 +1,13 @@
+id,name,rank
+/admin/system/index.php,0,0
+/admin/system/delete.php,0,1
+/admin/system/input.php,0,2
+/admin/system/master.php,0,3
+/admin/system/master_delete.php,0,4
+/admin/system/master_rank.php,0,5
+/admin/system/mastercsv.php,0,6
+/admin/system/rank.php,0,7
+/admin/entry/index.php,1,8
+/admin/entry/delete.php,1,9
+/admin/entry/inputzip.php,1,10
+/admin/search/delete_note.php,1,11

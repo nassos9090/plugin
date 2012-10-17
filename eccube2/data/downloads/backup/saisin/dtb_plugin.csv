@@ -1,0 +1,2 @@
+plugin_id,plugin_name,plugin_code,class_name,author,author_site_url,plugin_site_url,plugin_version,compliant_version,plugin_description,priority,enable,free_field1,free_field2,free_field3,free_field4,create_date,update_date
+2,最近購入された商品ブロック追加プラグイン,BbAddRecentPurchaseBlock,BbAddRecentPurchaseBlock,ボクブロック株式会社,http://www.bokublock.jp/,,0.2,2.12.0,サイト全体での最新購入商品を最大5件表示するブロックを追加します。(PCのみ),0,1,,,,,"2012-10-05 01:06:11.976142","2012-10-05 01:06:14.376746"

@@ -1,0 +1,6 @@
+id,name,rank
+1,/shopping/deliv.php,0
+2,/shopping/payment.php,1
+3,/shopping/confirm.php,2
+4,/shopping/card.php,3
+5,/shopping/loan.php,4

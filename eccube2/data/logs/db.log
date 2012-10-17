@@ -1,0 +1,11 @@
+2012/10/04 15:00:38 [/eccube-2.12.2/html/products/detail.php] [execute end 506d260461544#4]
+SQL: SELECT * FROM         dtb_blocposition AS pos
+            JOIN dtb_bloc AS bloc
+                ON bloc.bloc_id = pos.bloc_id
+                    AND bloc.device_type_id = pos.device_type_id WHERE bloc.device_type_id = $1 AND ((anywhere = 1 AND pos.page_id != 0) OR pos.page_id = $2)  ORDER BY target_id, bloc_row 
+PlaceHolder: array (
+  0 => 10,
+  1 => '3',
+)
+execution time: 2.16 sec
+ from 192.168.0.221

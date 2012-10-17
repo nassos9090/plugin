@@ -1,0 +1,3 @@
+member_id,name,department,login_id,password,salt,authority,rank,work,del_flg,creator_id,create_date,update_date,login_date
+1,dummy,,dummy,dummy,dummy,0,0,1,1,0,"2012-10-01 20:44:56.187796","2012-10-01 20:44:56.187796",
+2,管理者,,nassos9090,d06d787f0b5756eaab1a2bf95ce5bba9fdda1f7045286908a605c343ebb05764,stistoudae,0,1,1,0,0,"2012-10-01 20:45:11.594503","2012-10-01 20:45:11.594503","2012-10-05 12:55:34"
