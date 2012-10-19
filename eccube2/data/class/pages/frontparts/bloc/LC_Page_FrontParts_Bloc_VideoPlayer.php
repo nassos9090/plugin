@@ -1,11 +1,30 @@
 <?php
+/*
+* プラグインの名前、もしくは何をするのかについての簡単な説明（必須）
+* Copyright (C) 作成年（必須）、プラグイン作者名（必須）
+* 問合せ先email or URL（任意）
+*
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU Lesser General Public
+* License as published by the Free Software Foundation; either
+* version 2.1 of the License, or (at your option) any later version.
+*
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+* Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Lesser General Public
+* License along with this library; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 // {{{ requires
 require_once CLASS_EX_REALDIR . 'page_extends/frontparts/bloc/LC_Page_FrontParts_Bloc_Ex.php';
 
 /**
  * 新着商品ブロックのブロッククラス
  */
-class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_EX {
+class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
 
     /**
      * 初期化する.
@@ -32,8 +51,9 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_EX {
      * @return void
      */
     function action() {
-        //商品情報取得
-//        $this->arrNewItems = $this->lfGetVideoPlayer();
+        //動画プレイヤー設定情報取得
+        $this->arrVideoPlayer = $this->lfGetVideoPlayer();
+
     }
 
     /**
@@ -46,82 +66,13 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_EX {
     }
     
     /**
-     * 新着商品の情報を取得
+     * 動画プレイヤー設定情報取得
      *
      * @return array
      * @setcookie array
      */
-/*    function lfGetVideoPlayer(){
-        $objQuery =& SC_Query_Ex::getSingletonInstance();
-        $objProduct = new SC_Product_Ex();
-
-
-        // プラグイン情報を取得.
-        $plugin     = SC_Plugin_Util_Ex::getPluginByPluginCode("VideoPlayer");
-        //表示条件
-        $disp_rule  = is_numeric($plugin['free_field1']) ? $plugin['free_field1'] : 0;
-        //表示件数
-        $disp_count = unserialize($plugin['free_field2']);
-        //表示ステータス
-        $product_status = $plugin['free_field3'];
-
-        //デバイスフラグ
-       $disp_device == SC_Display_Ex::detectDevice();
-
-        // 新着商品情報取得
-        $col = 'product_id';
-        $table = 'dtb_products';
-        $where = 'status = 1 and del_flg = 0';
-
-        if($product_status){
-            $arrStatus = unserialize($product_status);
-            if(is_array( $arrStatus )){
-                $strstatus = '';
-                foreach( $arrStatus as $status ){
-                    if( $strstatus ) $strstatus .= ',';
-                    $strstatus .= $status;
-                }
-                $where .= ' '
-                        . 'AND product_id IN ('
-                        . '    SELECT product_id FROM dtb_product_status WHERE product_status_id IN (' . $strstatus . ')'
-                        . ')';
-            }
-        }
-        switch($disp_rule) {
-            case 1://登録日順
-                $objQuery->setOrder('create_date desc');
-            break;
-            case 2://更新日順
-                $objQuery->setOrder('update_date desc');
-            break;
-        }
-        
-        if (SC_Display_Ex::detectDevice() == DEVICE_TYPE_PC ) {
-           $objQuery->setLimit($disp_count[10]);
-        }elseif(SC_Display_Ex::detectDevice() == DEVICE_TYPE_MOBILE){
-           $objQuery->setLimit($disp_count[1]);
-        }elseif(SC_Display_Ex::detectDevice() == DEVICE_TYPE_SMARTPHONE ){
-           $objQuery->setLimit($disp_count[2]);
-        }
-        $arrProducts = $objQuery->select($col, $table, $where);
-
-
-        $objQuery =& SC_Query_Ex::getSingletonInstance();
-        if (count($arrProducts) > 0) {
-
-            $arrProductId = array();
-            foreach ($arrProducts as $key => $val) {
-                $arrProductId[] = $val['product_id'];
-            }
-
-            // 商品詳細情報取得
-            $arrTmp = $objProduct->getListByProductIds($objQuery, $arrProductId);
-            foreach ($arrTmp as $key => $arrRow) {
-                $_row = $arrRow;
-                $arrProductList[] = $_row;
-            }
-        }
-        return $arrProductList;
+    function lfGetVideoPlayer(){
+	$this->aaa ='http://www.youtube.com/embed/XQmhg9_Gpeo';
+        return $arrVideoPlayer;
     }
-*/
 }
