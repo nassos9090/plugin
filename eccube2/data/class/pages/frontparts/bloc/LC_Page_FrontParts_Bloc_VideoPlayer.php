@@ -26,12 +26,16 @@ require_once CLASS_EX_REALDIR . 'page_extends/frontparts/bloc/LC_Page_FrontParts
  */
 class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
 
+     // {{{ properties
+     /* youtubeのURLリンク*/
+     var $youtube_url = 'http://www.youtube.com/embed/';
     /**
      * 初期化する.
      *
      * @return void
      */
     function init() {
+
         parent::init();
     }
 
@@ -54,6 +58,7 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
         //動画プレイヤー設定情報取得
         $this->arrVideoPlayer = $this->lfGetVideoPlayer();
 
+
     }
 
     /**
@@ -72,7 +77,7 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
      * @setcookie array
      */
     function lfGetVideoPlayer(){
-	$this->aaa ='http://www.youtube.com/embed/XQmhg9_Gpeo';
+	$this->aaa = preg_replace('/.*v=([\d\w]+).*/', '$1', 'http://www.youtube.com/watch?v=XQmhg9_Gpeo&feature=g-all-xit');
         return $arrVideoPlayer;
     }
 }

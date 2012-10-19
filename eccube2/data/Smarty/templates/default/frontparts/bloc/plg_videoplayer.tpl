@@ -16,7 +16,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *}-->
+<!--*<!--{$aaa|debug_print_var}-->-->
 <iframe width="200" height="160" 
-	src="<!--{$aaa}-->?showinfo=0&rel=0&fs=0&controls=1&autohide=1"
+	src="<!--{$youtube_url}--><!--{$aaa}-->?showinfo=0&rel=0&fs=0&controls=1&autohide=1"
 	frameborder="0">
 	</iframe>
