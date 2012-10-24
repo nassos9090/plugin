@@ -1,23 +1,23 @@
-<!--{*
- * VideoPlayer
- * Copyright(c) 2012 DELIGHT Inc. All Rights Reserved.
- * 
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *}-->
-<!--*<!--{$aaa|debug_print_var}-->-->
-<iframe width="200" height="160" 
-	src="<!--{$youtube_url}--><!--{$aaa}-->?showinfo=0&rel=0&fs=0&controls=1&autohide=1"
-	frameborder="0">
-	</iframe>
+
+
+<!--{$youtube_id|@debug_print_var}--><br>
+<!--{$view_id|@debug_print_var}--><br>
+
+<!--{if $view_id == 'youtube'}-->
+    <iframe width="<!--{$video_width|h}-->" height="<!--{$video_height|h}-->" 
+		src="<!--{$youtube_url|h}--><!--{$youtube_id|h}-->?showinfo=0
+        	&amp;rel=0&amp;fs=0&amp;controls=1&amp;autohide=1"
+		frameborder="0">
+    </iframe>
+
+<!--{elseif $view_id == 'niconico'}-->
+    <script type="text/javascript" src="<!--{$nico_url|h}--><!--{$niconico_id|h}-->
+					?w=<!--{$video_width|h}-->
+					&amp;h=<!--{$video_height|h}-->">
+    </script>
+    <noscript>
+	<a href="<!--{$nico_url|h}--><!--{$niconico_id|h}-->">
+		動画はこちら
+	</a>
+    </noscript>
+<!--{/if}-->

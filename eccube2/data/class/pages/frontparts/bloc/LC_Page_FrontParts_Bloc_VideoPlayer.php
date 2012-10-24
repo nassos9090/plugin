@@ -27,15 +27,34 @@ require_once CLASS_EX_REALDIR . 'page_extends/frontparts/bloc/LC_Page_FrontParts
 class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
 
      // {{{ properties
-     /* youtubeのURLリンク*/
+
+     /* youtubeのURLリンク */
      var $youtube_url = 'http://www.youtube.com/embed/';
+
+     /* niconicoのURLリンク */
+     var $nico_url = 'http://ext.nicovideo.jp/thumb_watch/';
+
+     /* 動画の横幅 */
+     var $video_width;
+
+     /* 動画の高さ */
+     var $video_height = 200;
+
+     /* 動画判別用 */
+     var $view_id;
+
+     /* youtubeの正規表現 */
+ //    var $youtube_regular;
+
+     // }}} properties
+
     /**
      * 初期化する.
      *
      * @return void
      */
     function init() {
-
+	//$bloc_file = 'videoplayer.tpl';
         parent::init();
     }
 
@@ -58,8 +77,18 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
         //動画プレイヤー設定情報取得
         $this->arrVideoPlayer = $this->lfGetVideoPlayer();
 
+	/* アスペクト比の計算 */
+	if ($this->video_width == 0){
+            $this->video_width = $this->video_height / 9 * 16;
+	}
 
-    }
+	if ($this->video_height == 0){
+            $this->video_height = $this->video_width / 16 * 9;
+	}
+
+	//echo $height."<br>";
+
+  }
 
     /**
      * デストラクタ.
@@ -77,7 +106,34 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
      * @setcookie array
      */
     function lfGetVideoPlayer(){
-	$this->aaa = preg_replace('/.*v=([\d\w]+).*/', '$1', 'http://www.youtube.com/watch?v=XQmhg9_Gpeo&feature=g-all-xit');
+	$objQuery = new SC_Query();
+	$col = "*"; //カラム
+	$table = "dtb_videoplayer"; //テーブル名
+	$arrVideos = $objQuery->select($col,$table);
+
+
+	// youtube検索パターン
+	$youtube_pattern = '/^https?.*youtu.*v=([\d\w-]+).*/';
+	// niconico検索パターン
+	$niconico_pattern = '/^https?.*nicovideo.*([s|n]m[\d]+).*/';
+	// 検索する文字列
+	$string = 'http://www.youtube.com/watch?v=fL1lK-15yFk';
+
+        //$arrCatID = $objDb->sfGetParents("dtb_videoplayer", "parent_category_id", "category_id", $category_id);
+
+	if (preg_match("/youtu/", $arrVideos[1]["video_url"])){
+		$this->youtube_id = preg_replace($youtube_pattern,'$1',$arrVideos[1]["video_url"]);
+		$this->view_id = 'youtube';
+	}
+	else if (preg_match("/nico/", $arrVideos[1]["video_url"])){
+		$this->niconico_id = preg_replace($niconico_pattern,'$1',$arrVideos[1]["video_url"]);
+		$this->view_id = 'niconico';
+	}
+	//$this-＞tpl_mainpage = '';
+	
+	var_dump($arrVideos[0]["video_url"]);
+	
         return $arrVideoPlayer;
     }
+
 }
