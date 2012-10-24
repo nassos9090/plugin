@@ -1,6 +1,7 @@
 
 
 <!--{$youtube_id|@debug_print_var}--><br>
+<!--{$niconico_id|@debug_print_var}--><br>
 <!--{$view_id|@debug_print_var}--><br>
 
 <!--{if $view_id == 'youtube'}-->

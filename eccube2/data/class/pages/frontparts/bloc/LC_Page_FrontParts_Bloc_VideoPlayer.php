@@ -110,28 +110,33 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
 	$col = "*"; //カラム
 	$table = "dtb_videoplayer"; //テーブル名
 	$arrVideos = $objQuery->select($col,$table);
-
-
 	// youtube検索パターン
-	$youtube_pattern = '/^https?.*youtu.*v=([\d\w-]+).*/';
+	$youtube_pattern1 = '/^https?.*youtu.*v=([\d\w-]{11}).*/';
+	$youtube_pattern2 = '/.*\.be.([\d\w-]{11})/';
+	$youtube_pattern3 = '/.*.embed.([\d\w-]{11}).*/';
 	// niconico検索パターン
 	$niconico_pattern = '/^https?.*nicovideo.*([s|n]m[\d]+).*/';
-	// 検索する文字列
-	$string = 'http://www.youtube.com/watch?v=fL1lK-15yFk';
 
-        //$arrCatID = $objDb->sfGetParents("dtb_videoplayer", "parent_category_id", "category_id", $category_id);
-
-	if (preg_match("/youtu/", $arrVideos[1]["video_url"])){
-		$this->youtube_id = preg_replace($youtube_pattern,'$1',$arrVideos[1]["video_url"]);
-		$this->view_id = 'youtube';
+	/* yotubeURL判別 */
+	if (preg_match("/youtu/", $arrVideos[3]["video_url"])){
+	    if (preg_match("/v=/", $arrVideos[3]["video_url"])){
+		$this->youtube_id = preg_replace($youtube_pattern1,'$1',$arrVideos[3]["video_url"]);
+	    }
+	    if (preg_match("/\.be/", $arrVideos[3]["video_url"])){
+		$this->youtube_id = preg_replace($youtube_pattern2,'$1',$arrVideos[3]["video_url"]);
+	    }
+	    if (preg_match("/embed/", $arrVideos[3]["video_url"])){
+		$this->youtube_id = preg_replace($youtube_pattern3,'$1',$arrVideos[3]["video_url"]);
+	    }
+	    $this->view_id = 'youtube';
 	}
-	else if (preg_match("/nico/", $arrVideos[1]["video_url"])){
-		$this->niconico_id = preg_replace($niconico_pattern,'$1',$arrVideos[1]["video_url"]);
+	/* niconicoURL判別 */
+	else if (preg_match("/nico/", $arrVideos[3]["video_url"])){
+		$this->niconico_id = preg_replace($niconico_pattern,'$1',$arrVideos[3]["video_url"]);
 		$this->view_id = 'niconico';
 	}
-	//$this-＞tpl_mainpage = '';
-	
-	var_dump($arrVideos[0]["video_url"]);
+		
+	var_dump($arrVideos[3]["video_url"]);
 	
         return $arrVideoPlayer;
     }
