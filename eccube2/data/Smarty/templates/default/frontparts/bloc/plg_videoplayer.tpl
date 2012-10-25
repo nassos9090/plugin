@@ -2,7 +2,10 @@
 
 <!--{$youtube_id|@debug_print_var}--><br>
 <!--{$niconico_id|@debug_print_var}--><br>
+<!--{$product_id|@debug_print_var}--><br>
 <!--{$view_id|@debug_print_var}--><br>
+<!--{$video_url|@debug_print_var}--><br>
+
 
 <!--{if $view_id == 'youtube'}-->
     <iframe width="<!--{$video_width|h}-->" height="<!--{$video_height|h}-->" 
