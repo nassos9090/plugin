@@ -1,14 +1,31 @@
-
-
-<!--{$youtube_id|@debug_print_var}--><br>
-<!--{$niconico_id|@debug_print_var}--><br>
-<!--{$product_id|@debug_print_var}--><br>
-<!--{$view_id|@debug_print_var}--><br>
-<!--{$video_url|@debug_print_var}--><br>
-
+<!--{*
+* VideoPlayer
+* Copyright (C) 2012/10/25 katube
+*
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU Lesser General Public
+* License as published by the Free Software Foundation; either
+* version 2.1 of the License, or (at your option) any later version.
+*
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+* Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Lesser General Public
+* License along with this library; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*}-->
+<!--{*
+*<!--{$youtube_id|@debug_print_var}--><br>
+*<!--{$niconico_id|@debug_print_var}--><br>
+*<!--{$product_id|@debug_print_var}--><br>
+*<!--{$view_id|@debug_print_var}--><br>
+*<!--{$arrVideo|@debug_print_var}--><br>
+*}-->
 
 <!--{if $view_id == 'youtube'}-->
-    <iframe width="<!--{$video_width|h}-->" height="<!--{$video_height|h}-->" 
+    <iframe width="<!--{$arrVideo.disp_width|h}-->" height="<!--{$arrVideo.disp_height|h}-->" 
 		src="<!--{$youtube_url|h}--><!--{$youtube_id|h}-->?showinfo=0
         	&amp;rel=0&amp;fs=0&amp;controls=1&amp;autohide=1"
 		frameborder="0">
@@ -16,12 +33,15 @@
 
 <!--{elseif $view_id == 'niconico'}-->
     <script type="text/javascript" src="<!--{$nico_url|h}--><!--{$niconico_id|h}-->
-					?w=<!--{$video_width|h}-->
-					&amp;h=<!--{$video_height|h}-->">
+					?w=<!--{$arrVideo.disp_width|h}-->
+					&amp;h=<!--{$arrVideo.disp_height|h}-->">
     </script>
     <noscript>
 	<a href="<!--{$nico_url|h}--><!--{$niconico_id|h}-->">
 		動画はこちら
 	</a>
     </noscript>
+<!--{else}-->
+    動画が表示できませんでした。URLをもう一度ご確認ください。
+  
 <!--{/if}-->
