@@ -26,9 +26,10 @@
 
 <!--{if $view_id == 'youtube'}-->
     <iframe width="<!--{$arrVideo.disp_width|h}-->" height="<!--{$arrVideo.disp_height|h}-->" 
-		src="<!--{$youtube_url|h}--><!--{$youtube_id|h}-->?showinfo=0
-        	&amp;rel=0&amp;fs=0&amp;controls=1&amp;autohide=1"
-		frameborder="0">
+		src="<!--{$youtube_url|h}--><!--{$youtube_id|h}-->?modestbranding=1"
+        	&amp;rel=0"
+		frameborder="0"
+		allowfullscreen>
     </iframe>
 
 <!--{elseif $view_id == 'niconico'}-->
@@ -41,7 +42,7 @@
 		動画はこちら
 	</a>
     </noscript>
-<!--{else}-->
+<!--{elseif $view_id != 'NULL'}-->
     動画が表示できませんでした。URLをもう一度ご確認ください。
   
 <!--{/if}-->

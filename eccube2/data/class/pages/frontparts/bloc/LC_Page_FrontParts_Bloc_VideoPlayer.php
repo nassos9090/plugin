@@ -128,20 +128,25 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
 	$youtube_pattern2 = '/.*\.be.([\d\w-]{11})/';
 	$youtube_pattern3 = '/.*.embed.([\d\w-]{11}).*/';
 	// niconico検索パターン
-	$niconico_pattern = '/^https?.*nicovideo.*([s|n]m[\d]+).*/';
+	$niconico_pattern = '/^https?.*nicovideo.*([s|n]m[\d]+)/';
 
 	/* yotubeURL判別 */
 	if (preg_match('/youtu/', $this->arrVideo['video_url'])){
-	    if (preg_match('/v=/', $this->arrVideo['video_url'])){
+	    if (preg_match('/\?v=/', $this->arrVideo['video_url'])){
+		$this->view_id = 'youtube';
 		$this->youtube_id = preg_replace($youtube_pattern1,'$1',$this->arrVideo['video_url']);
 	    }
 	    if (preg_match('/\.be/', $this->arrVideo['video_url'])){
+		$this->view_id = 'youtube';
 		$this->youtube_id = preg_replace($youtube_pattern2,'$1',$this->arrVideo['video_url']);
 	    }
 	    if (preg_match('/embed/', $this->arrVideo['video_url'])){
+		$this->view_id = 'youtube';
 		$this->youtube_id = preg_replace($youtube_pattern3,'$1',$this->arrVideo['video_url']);
 	    }
-	    $this->view_id = 'youtube';
+	    else{
+	        $this->view_id = 'get url failed';
+	    }
 	}
 	/* niconicoURL判別 */
 	else if (preg_match('/nico/', $this->arrVideo['video_url'])){
@@ -149,7 +154,7 @@ class LC_Page_FrontParts_Bloc_VideoPlayer extends LC_Page_FrontParts_Bloc_Ex {
 		$this->view_id = 'niconico';
 	}
 	else {
-	     $this->  view_id = 'NULL';
+	     $this->  view_id = 'get url failed';
 	}
         return $arrVideoPlayer;
     }
