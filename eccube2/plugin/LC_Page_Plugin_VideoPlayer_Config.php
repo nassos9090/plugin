@@ -117,7 +117,8 @@ class LC_Page_Plugin_VideoPlayer_Config extends LC_Page_Admin_Ex {
         $objFormParam->addParam('動画URL', 'video_url', URL_LEN, 'n', array('URL_CHECK','SPTAB_CHECK', 'MAX_LENGTH_CHECK'));
         $objFormParam->addParam('幅', 'disp_width', ZIP01_LEN, 'n', array('NUM_CHECK','NO_SPTAB','NUM_COUNT_CHECK'));
         $objFormParam->addParam('高さ', 'disp_height', ZIP01_LEN, 'n', array('NUM_CHECK','NO_SPTAB','NUM_COUNT_CHECK'));
-
+//	var_dump($objFormParam);
+//	exit;
     }
 
     /**
