@@ -65,7 +65,8 @@ class LC_Page_Plugin_VideoPlayer_Config extends LC_Page_Admin_Ex {
         $this->lfInitParam($objFormParam);
         $objFormParam->setParam($_POST);
         $objFormParam->convParam();
-        
+        $this->arrErr = $this->lfCheckError($objFormParam);
+
         $arrForm = array();
         
         switch ($this->getMode()) {
@@ -184,26 +185,45 @@ class LC_Page_Plugin_VideoPlayer_Config extends LC_Page_Admin_Ex {
         if (strlen($this->arrParam[$value[1]]) > 0 && !preg_match("@^https?://+($|[a-zA-Z0-9_~=:&\?\.\/-])+$@i", $this->arrParam[$value[1]])) {
             $this->arrErr[$value[1]] = '※ ' . $value[0] . 'を正しく入力してください。<br />';
         }else if(strlen($this->arrParam[$value[1]]) > 0){
-            $warningText = '※ 動画が表示できませんでした。URLをもう一度ご確認ください。<br />';
-            /* yotubeURL判別 */ 
-            //"@^https?://.*youtu.*v=([a-zA-Z0-9]+).*@i","@^https?://.*youtu.*be.([a-zA-Z0-9]+).*@i","@^https?://.*youtu.*embed.([a-zA-Z0-9]+).*@i"
-            if(preg_match('/youtu/', $this->arrParam[$value[1]])){
-                if(preg_match('/\?v=/', $this->arrParam[$value[1]])){
-                    $this->arrErr[$value[1]] = $warningText;
-                }
-                else if(preg_match('/\.be/', $this->arrParam[$value[1]])){
-                    $this->arrErr[$value[1]] = $warningText;
-                }
-                else if (preg_match('/embed/', $this->arrParam[$value[1]])){
-                    $this->arrErr[$value[1]] = $warningText;
-                }
-            }
-            /* niconicoURL判別 */ //"@^https?://.*nico.*([s|n]m[0-9]+).*@i"
-            else if (preg_match('/nico/', $this->arrParam[$value[1]])){
-                $this->arrErr[$value[1]] = $warningText;
+
+            /* yotubeURL判別 + niconicoURL判別 */
+            if(!preg_match("@^https?://.*youtu.+v=([a-zA-Z0-9]+).*@i", $this->arrParam[$value[1]]) &&
+               !preg_match("@^https?://.*youtu.+be.([a-zA-Z0-9]+).*@i", $this->arrParam[$value[1]]) &&
+               !preg_match("@^https?://.*youtu.+embed.([a-zA-Z0-9]+).*@i", $this->arrParam[$value[1]]) &&
+               !preg_match("@^https?://.+nico.+([s|n]m[0-9]+).*@i", $this->arrParam[$value[1]])
+               ){
+                $this->arrErr[$value[1]] ='※ 動画が表示できませんでした。URLをもう一度ご確認ください。<br />';
             }
         }
     }
+    
+    /**
+     * 入力内容のチェックを行う.
+     *
+     * @param SC_FormParam $objFormParam SC_FormParam インスタンス
+     * @return void
+     */
+    function lfCheckError(&$objFormParam) {
+        $objErr = new SC_CheckError_Ex($objFormParam->getHashArray());
+        $objErr->arrErr = $objFormParam->checkError();
 
+        echo $video_url = $objFormParam->getValue('video_url');
+	if (isset($video_url)) {
+            return;
+        }
+        if (strlen($video_url) > 0 && !preg_match("@^https?://+($|[a-zA-Z0-9_~=:&\?\.\/-])+$@i", $video_url)) {
+            $objErr->arrErr['video_url'] = '※ URLを正しく入力してください。<br />';
+        }
+//          else if(strlen($video_url) > 0){
+            if(!preg_match("@^https?://.*youtu.+v=([a-zA-Z0-9]+).*@i", $video_url) &&
+               !preg_match("@^https?://.*youtu.+be.([a-zA-Z0-9]+).*@i", $video_url) &&
+               !preg_match("@^https?://.*youtu.+embed.([a-zA-Z0-9]+).*@i", $video_url) &&
+               !preg_match("@^https?://.+nico.+([s|n]m[0-9]+).*@i", $video_url)){
+
+               $objErr->arrErr['video_url']='※ 動画が表示できませんでした。URLをもう一度ご確認ください。<br />';
+	    }
+//        }
+        return $objErr->arrErr;
+    }
 }
-?>
+
