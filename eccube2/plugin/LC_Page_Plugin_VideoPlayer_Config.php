@@ -207,14 +207,14 @@ class LC_Page_Plugin_VideoPlayer_Config extends LC_Page_Admin_Ex {
         $objErr = new SC_CheckError_Ex($objFormParam->getHashArray());
         $objErr->arrErr = $objFormParam->checkError();
 
-        echo $video_url = $objFormParam->getValue('video_url');
+ //       echo $video_url = $objFormParam->getValue('video_url');
 	if (isset($video_url)) {
             return;
         }
         if (strlen($video_url) > 0 && !preg_match("@^https?://+($|[a-zA-Z0-9_~=:&\?\.\/-])+$@i", $video_url)) {
             $objErr->arrErr['video_url'] = '※ URLを正しく入力してください。<br />';
         }
-//          else if(strlen($video_url) > 0){
+          else if(strlen($video_url) > 0){
             if(!preg_match("@^https?://.*youtu.+v=([a-zA-Z0-9]+).*@i", $video_url) &&
                !preg_match("@^https?://.*youtu.+be.([a-zA-Z0-9]+).*@i", $video_url) &&
                !preg_match("@^https?://.*youtu.+embed.([a-zA-Z0-9]+).*@i", $video_url) &&
@@ -222,7 +222,7 @@ class LC_Page_Plugin_VideoPlayer_Config extends LC_Page_Admin_Ex {
 
                $objErr->arrErr['video_url']='※ 動画が表示できませんでした。URLをもう一度ご確認ください。<br />';
 	    }
-//        }
+        }
         return $objErr->arrErr;
     }
 }
